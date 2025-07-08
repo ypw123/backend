@@ -4,7 +4,9 @@ const fastifyMultipart = require('@fastify/multipart');
 const fastifyCors = require('@fastify/cors');
 require('dotenv').config();
 
-fastify.register(fastifyCors);
+fastify.register(fastifyCors, {
+  origin: true // 允许所有来源，开发阶段方便 ngrok 访问
+});
 fastify.register(fastifyMultipart);
 
 fastify.get('/', async (request, reply) => {
