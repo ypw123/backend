@@ -30,7 +30,7 @@ fastify.post('/analyze-image', async (request, reply) => {
 
 const start = async () => {
   try {
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 8080;
     await fastify.listen({ port, host: '0.0.0.0' });
     fastify.log.info(`server listening on http://0.0.0.0:${port}`);
   } catch (err) {
