@@ -1,10 +1,11 @@
-const analyzeImage = require('../backend/analyze');
+import analyzeImage from '../backend/analyze.js';
 
 function setCORS(req, res) {
   const origin = req.headers.origin;
   if (
     origin === 'https://ypw123.github.io' ||
-    /^http:\/\/localhost(:\d+)?$/.test(origin)
+    /^http:\/\/localhost(:\d+)?$/.test(origin) ||
+    /^http:\/\/127\\.0\\.0\\.1(:\\d+)?$/.test(origin)
   ) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
@@ -12,7 +13,7 @@ function setCORS(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   setCORS(req, res);
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -51,4 +52,4 @@ module.exports = async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: 'AI服务异常', detail: e.message });
   }
-}; 
+}
